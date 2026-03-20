@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Hub MM | Cyber Platform</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2300f2ff'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='black' font-family='monospace' font-weight='bold'>S</text></svg>">
+
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
             --bg-black: #05050a; --neon-teal: #00f2ff; --neon-purple: #bc13fe;
@@ -15,8 +19,10 @@
         #matrixCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
         /* Auth Container */
-        .auth-container { background: var(--glass); backdrop-filter: blur(15px); border-radius: 15px; padding: 30px; width: 330px; text-align: center; border: 1px solid var(--neon-teal); z-index: 100; margin-top: 40px; box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); }
-        .brand-title { color: var(--neon-teal); font-size: 1.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px var(--neon-teal); margin-bottom: 20px; }
+        .auth-container { background: var(--glass); backdrop-filter: blur(15px); border-radius: 15px; padding: 30px; width: 90%; max-width: 340px; text-align: center; border: 1px solid var(--neon-teal); z-index: 100; margin-top: 40px; box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); align-self: flex-start; }
+        
+        .logo-box { margin-bottom: 20px; display: flex; justify-content: center; }
+        
         .welcome-header { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid rgba(0, 242, 255, 0.1); }
         .tagline { color: var(--neon-teal); font-size: 0.9rem; letter-spacing: 2px; text-shadow: 0 0 8px var(--neon-teal); margin-bottom: 8px; font-weight: bold; }
         .my-welcome { color: rgba(255, 255, 255, 0.8); font-size: 0.75rem; line-height: 1.6; font-family: 'Padauk'; }
@@ -45,7 +51,16 @@
     <canvas id="matrixCanvas"></canvas>
 
     <div class="auth-container" id="authUI">
-        <div class="brand-title">SOCIAL-HUB-MM</div>
+        <div class="logo-box">
+            <svg width="220" height="80" viewBox="0 0 250 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10 C 30 10, 10 30, 10 50 C 10 70, 30 90, 50 90 C 70 90, 90 70, 90 50 C 90 30, 70 10, 50 10 Z" fill="var(--neon-teal)" />
+                <path d="M50 30 L50 70 M30 50 L70 50 M35 35 L65 65 M35 65 L65 35" stroke="#05050a" stroke-width="3" stroke-linecap="round" />
+                <circle cx="50" cy="50" r="8" fill="#05050a" />
+                <text x="105" y="55" font-family="'Share Tech Mono', monospace" font-size="22" font-weight="bold" fill="var(--neon-teal)" style="text-shadow: 0 0 10px var(--neon-teal);">SOCIAL HUB</text>
+                <text x="105" y="75" font-family="'Padauk'" font-size="14" fill="white" opacity="0.8">မြန်မာ့ Cyber ကွန်ရက်</text>
+            </svg>
+        </div>
+
         <div id="loginArea">
             <div class="welcome-header">
                 <div class="tagline">CONNECT. SHARE. SECURE.</div>
@@ -76,25 +91,37 @@
 
     <div id="dashboard">
         <div class="glass-panel" style="text-align: center;">
-            <div style="width: 70px; height: 70px; background: linear-gradient(45deg, var(--neon-teal), var(--neon-purple)); border-radius: 50%; margin: 0 auto 10px; border: 2px solid var(--neon-teal);"></div>
-            <h3 id="userDisplay">Admin User</h3>
-            <p style="color: var(--neon-green); font-size: 0.7rem;">● Online</p>
+            <div style="width: 70px; height: 70px; background: linear-gradient(45deg, var(--neon-teal), var(--neon-purple)); border-radius: 50%; margin: 0 auto 10px; border: 2px solid var(--neon-teal); display: flex; align-items: center; justify-content: center; font-size: 2rem;">👤</div>
+            <h3 id="userDisplay" style="margin: 5px 0;">Admin User</h3>
+            <p style="color: var(--neon-green); font-size: 0.7rem; margin: 0;">● Online</p>
         </div>
         <div class="glass-panel">
-            <textarea id="postContent" style="width:100%; height:60px; background:rgba(0,0,0,0.3); color:white; border:1px dashed var(--neon-purple); border-radius:8px; padding:10px; box-sizing:border-box; font-family:'Padauk';" placeholder="ဘာတွေတွေးနေလဲ..."></textarea>
-            <button onclick="createPost()" style="background: var(--neon-teal); border: none; padding: 10px 25px; border-radius: 6px; font-weight: bold; cursor: pointer; float: right; margin-top: 10px;">Post</button>
+            <textarea id="postContent" style="width:100%; height:60px; background:rgba(0,0,0,0.3); color:white; border:1px dashed var(--neon-purple); border-radius:8px; padding:10px; box-sizing:border-box; font-family:'Padauk'; outline: none;" placeholder="ဘာတွေတွေးနေလဲ..."></textarea>
+            <button onclick="createPost()" style="background: var(--neon-teal); border: none; padding: 10px 25px; border-radius: 6px; font-weight: bold; cursor: pointer; float: right; margin-top: 10px; color: black;">Post</button>
         </div>
         <div id="feedList"></div>
     </div>
 
     <script>
-        // Matrix BG
+        // Matrix BG Effect
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         canvas.height = window.innerHeight; canvas.width = window.innerWidth;
         const characters = "01MSBH"; const fontSize = 16;
         const columns = canvas.width / fontSize; const drops = Array(Math.floor(columns)).fill(1);
-        function drawMatrix() { ctx.fillStyle = 'rgba(5, 5, 10, 0.15)'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = "#004d40"; ctx.font = fontSize + 'px monospace'; drops.forEach((y, i) => { const text = characters.charAt(Math.floor(Math.random() * characters.length)); ctx.fillText(text, i * fontSize, y * fontSize); if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0; drops[i]++; }); }
+        
+        function drawMatrix() { 
+            ctx.fillStyle = 'rgba(5, 5, 10, 0.15)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height); 
+            ctx.fillStyle = "#004d40"; 
+            ctx.font = fontSize + 'px monospace'; 
+            drops.forEach((y, i) => { 
+                const text = characters.charAt(Math.floor(Math.random() * characters.length)); 
+                ctx.fillText(text, i * fontSize, y * fontSize); 
+                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0; 
+                drops[i]++; 
+            }); 
+        }
         setInterval(drawMatrix, 40);
 
         function toggleView(view) {
@@ -102,19 +129,20 @@
             document.getElementById('registerArea').style.display = view === 'reg' ? 'block' : 'none';
         }
 
-        // Login Logic
+        // Simple Login Logic
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const pass = document.getElementById('password').value;
+            // Admin Credential
             if(email === "lwink4141@gmail.com" && pass === "lwink4141") {
                 document.getElementById('authUI').style.display = "none";
                 document.getElementById('dashboard').style.display = "flex";
                 renderPosts();
-            } else { alert("Login Error!"); }
+            } else { alert("အီးမေးလ် သို့မဟုတ် ပတ်စ်ဝပ် မှားယွင်းနေပါသည်။"); }
         });
 
-        // Post Rendering with Reactions & Comments
+        // Post Rendering
         function createPost() {
             const content = document.getElementById('postContent').value;
             if (!content.trim()) return;
@@ -130,7 +158,7 @@
             document.getElementById('feedList').innerHTML = posts.map(p => `
                 <div class="post-card glass-panel">
                     <h4 style="margin:0; color: var(--neon-teal);">Admin User</h4>
-                    <p style="margin: 10px 0; font-family:'Padauk';">${p.text}</p>
+                    <p style="margin: 10px 0; font-family:'Padauk'; color: #eee;">${p.text}</p>
                     <div class="post-actions">
                         <button class="action-btn" onclick="this.classList.toggle('active')"><i class="fa-regular fa-thumbs-up"></i> Reaction</button>
                         <button class="action-btn" onclick="toggleComment('${p.id}')"><i class="fa-regular fa-comment"></i> Comment</button>
@@ -146,6 +174,13 @@
             const box = document.getElementById(`comment-${id}`);
             box.style.display = box.style.display === 'block' ? 'none' : 'block';
         }
+
+        // Handle window resize for matrix
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
+
