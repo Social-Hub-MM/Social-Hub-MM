@@ -14,64 +14,81 @@
         body { margin: 0; padding: 0; background-color: var(--bg-black); font-family: 'Share Tech Mono', 'Padauk', monospace; color: white; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
         #matrixCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-        /* Login UI */
-        .login-box { background: var(--glass); backdrop-filter: blur(15px); border-radius: 15px; padding: 30px; width: 320px; text-align: center; border: 1px solid var(--neon-teal); z-index: 100; margin-top: 50px; }
-        .brand-title { color: var(--neon-teal); font-size: 1.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px var(--neon-teal); margin-bottom: 5px; }
-        .auth-label { color: var(--neon-purple); font-size: 0.6rem; letter-spacing: 3px; margin-bottom: 25px; text-transform: uppercase; }
-        .input-group input { width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.6); border: 1px solid var(--neon-purple); border-radius: 5px; color: white; box-sizing: border-box; outline: none; margin-bottom: 15px; }
-        .btn-neon { width: 100%; padding: 12px; background: transparent; border: 1px solid var(--neon-teal); color: var(--neon-teal); font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; }
+        /* Auth Container */
+        .auth-container { background: var(--glass); backdrop-filter: blur(15px); border-radius: 15px; padding: 30px; width: 330px; text-align: center; border: 1px solid var(--neon-teal); z-index: 100; margin-top: 40px; box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); }
+        .brand-title { color: var(--neon-teal); font-size: 1.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px var(--neon-teal); margin-bottom: 20px; }
+        .welcome-header { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid rgba(0, 242, 255, 0.1); }
+        .tagline { color: var(--neon-teal); font-size: 0.9rem; letter-spacing: 2px; text-shadow: 0 0 8px var(--neon-teal); margin-bottom: 8px; font-weight: bold; }
+        .my-welcome { color: rgba(255, 255, 255, 0.8); font-size: 0.75rem; line-height: 1.6; font-family: 'Padauk'; }
 
-        /* Dashboard & Feed */
+        /* Inputs */
+        .input-group { margin-bottom: 15px; }
+        .input-group input { width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.6); border: 1px solid var(--neon-purple); border-radius: 5px; color: white; box-sizing: border-box; outline: none; transition: 0.3s; }
+        .btn-neon { width: 100%; padding: 12px; background: transparent; border: 1px solid var(--neon-teal); color: var(--neon-teal); font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; transition: 0.3s; }
+        .btn-neon:hover { background: var(--neon-teal); color: black; box-shadow: 0 0 20px var(--neon-teal); }
+        .switch-link { color: var(--neon-purple); font-size: 0.8rem; cursor: pointer; margin-top: 15px; display: block; text-decoration: underline; opacity: 0.8; }
+
+        /* Dashboard */
         #dashboard { display: none; flex-direction: column; gap: 15px; width: 92%; max-width: 500px; margin: 20px auto; z-index: 100; }
         .glass-panel { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid rgba(0, 242, 255, 0.2); border-radius: 12px; padding: 20px; box-sizing: border-box; }
-        .post-input-area textarea { width: 100%; height: 80px; background: rgba(0,0,0,0.3); border: 1px dashed var(--neon-purple); border-radius: 8px; color: white; padding: 10px; box-sizing: border-box; resize: none; margin-bottom: 12px; font-family: 'Padauk'; }
         
-        /* Post Card Actions (New) */
-        .post-card { background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--neon-teal); position: relative; }
-        .post-actions { display: flex; gap: 20px; margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .action-btn { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 5px; transition: 0.3s; }
-        .action-btn:hover { color: var(--neon-teal); }
+        /* Post Styling */
+        .post-card { background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--neon-teal); }
+        .post-actions { display: flex; gap: 20px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .action-btn { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 5px; transition: 0.3s; }
         .action-btn.active { color: var(--neon-teal); text-shadow: 0 0 5px var(--neon-teal); }
-        
         .comment-box { margin-top: 10px; display: none; }
-        .comment-input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--neon-purple); color: white; padding: 8px; border-radius: 5px; font-size: 0.8rem; outline: none; }
-
-        .platform-intro { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(0, 242, 255, 0.1); }
-        .neon-text { color: var(--neon-teal); font-size: 0.9rem; text-shadow: 0 0 10px var(--neon-teal); margin-bottom: 8px; }
-        .sub-text { color: rgba(255, 255, 255, 0.7); font-size: 0.75rem; line-height: 1.6; font-family: 'Padauk'; }
+        .comment-input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--neon-purple); color: white; padding: 8px; border-radius: 5px; font-size: 0.75rem; outline: none; }
     </style>
 </head>
 <body>
     <canvas id="matrixCanvas"></canvas>
 
-    <div class="login-box" id="loginUI">
-        <div class="brand-title">Social-Hub-MM</div>
-        <div class="auth-label">Secure Access Point</div>
-        <form id="loginForm">
-            <input type="email" id="email" placeholder="Email" required style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.6); border: 1px solid var(--neon-purple); border-radius: 5px; color: white; margin-bottom: 15px;">
-            <input type="password" id="password" placeholder="Password" required style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.6); border: 1px solid var(--neon-purple); border-radius: 5px; color: white; margin-bottom: 15px;">
-            <button type="submit" class="btn-neon">Enter Platform</button>
-            <div class="platform-intro">
-                <p class="neon-text">Connect. Share. Secure.</p>
-                <p class="sub-text">မြန်မာနိုင်ငံ၏ ပထမဆုံးသော Cyber-Security အခြေခံ <br> Social Platform မှ ကြိုဆိုပါသည်။</p>
+    <div class="auth-container" id="authUI">
+        <div class="brand-title">SOCIAL-HUB-MM</div>
+        <div id="loginArea">
+            <div class="welcome-header">
+                <div class="tagline">CONNECT. SHARE. SECURE.</div>
+                <div class="my-welcome">Social Platform မှ ကြိုဆိုပါသည်။</div>
             </div>
-        </form>
+            <form id="loginForm">
+                <div class="input-group"><input type="email" id="email" placeholder="Email" required></div>
+                <div class="input-group"><input type="password" id="password" placeholder="Password" required></div>
+                <button type="submit" class="btn-neon">LOGIN လုပ်မည်</button>
+            </form>
+            <span class="switch-link" onclick="toggleView('reg')">အကောင့်အသစ်ဖွင့်ရန် (Register)</span>
+        </div>
+
+        <div id="registerArea" style="display: none;">
+            <div class="welcome-header">
+                <div class="tagline" style="color: var(--neon-green);">JOIN THE HUB</div>
+                <div class="my-welcome">Member အသစ်အဖြစ် ကြိုဆိုပါတယ်။</div>
+            </div>
+            <form id="registerForm">
+                <div class="input-group"><input type="text" id="regName" placeholder="Full Name" required></div>
+                <div class="input-group"><input type="email" id="regEmail" placeholder="Email" required></div>
+                <div class="input-group"><input type="password" id="regPass" placeholder="Password" required></div>
+                <button type="submit" class="btn-neon" style="border-color: var(--neon-green); color: var(--neon-green);">REGISTER</button>
+            </form>
+            <span class="switch-link" onclick="toggleView('login')">Login ပြန်ဝင်ရန်</span>
+        </div>
     </div>
 
     <div id="dashboard">
-        <div class="sidebar glass-panel" style="text-align: center;">
-            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--neon-teal), var(--neon-purple)); border-radius: 50%; margin: 0 auto 10px; border: 2px solid var(--neon-teal);"></div>
-            <h3 style="margin: 0;">Admin User</h3>
+        <div class="glass-panel" style="text-align: center;">
+            <div style="width: 70px; height: 70px; background: linear-gradient(45deg, var(--neon-teal), var(--neon-purple)); border-radius: 50%; margin: 0 auto 10px; border: 2px solid var(--neon-teal);"></div>
+            <h3 id="userDisplay">Admin User</h3>
             <p style="color: var(--neon-green); font-size: 0.7rem;">● Online</p>
         </div>
-        <div class="post-input-area glass-panel">
-            <textarea id="postContent" placeholder="ဘာတွေတွေးနေလဲ..."></textarea>
-            <button onclick="createPost()" style="background: var(--neon-teal); border: none; padding: 10px 25px; border-radius: 6px; font-weight: bold; cursor: pointer; float: right;">Post</button>
+        <div class="glass-panel">
+            <textarea id="postContent" style="width:100%; height:60px; background:rgba(0,0,0,0.3); color:white; border:1px dashed var(--neon-purple); border-radius:8px; padding:10px; box-sizing:border-box; font-family:'Padauk';" placeholder="ဘာတွေတွေးနေလဲ..."></textarea>
+            <button onclick="createPost()" style="background: var(--neon-teal); border: none; padding: 10px 25px; border-radius: 6px; font-weight: bold; cursor: pointer; float: right; margin-top: 10px;">Post</button>
         </div>
         <div id="feedList"></div>
     </div>
 
     <script>
+        // Matrix BG
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         canvas.height = window.innerHeight; canvas.width = window.innerWidth;
@@ -80,55 +97,49 @@
         function drawMatrix() { ctx.fillStyle = 'rgba(5, 5, 10, 0.15)'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = "#004d40"; ctx.font = fontSize + 'px monospace'; drops.forEach((y, i) => { const text = characters.charAt(Math.floor(Math.random() * characters.length)); ctx.fillText(text, i * fontSize, y * fontSize); if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0; drops[i]++; }); }
         setInterval(drawMatrix, 40);
 
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        function toggleView(view) {
+            document.getElementById('loginArea').style.display = view === 'login' ? 'block' : 'none';
+            document.getElementById('registerArea').style.display = view === 'reg' ? 'block' : 'none';
+        }
+
+        // Login Logic
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const pass = document.getElementById('password').value;
-            if (email === "lwink4141@gmail.com" && pass === "lwink4141") {
-                document.getElementById('loginUI').style.display = "none";
-                const dash = document.getElementById('dashboard');
-                dash.style.display = "flex"; setTimeout(() => dash.style.opacity = "1", 50);
-                loadPosts();
-            } else { window.location.href = "https://www.facebook.com"; }
+            if(email === "lwink4141@gmail.com" && pass === "lwink4141") {
+                document.getElementById('authUI').style.display = "none";
+                document.getElementById('dashboard').style.display = "flex";
+                renderPosts();
+            } else { alert("Login Error!"); }
         });
 
+        // Post Rendering with Reactions & Comments
         function createPost() {
             const content = document.getElementById('postContent').value;
             if (!content.trim()) return;
             const posts = JSON.parse(localStorage.getItem('myPosts')) || [];
-            posts.unshift({ id: Date.now(), text: content, date: new Date().toLocaleString(), likes: 0 });
+            posts.unshift({ id: Date.now(), text: content, date: new Date().toLocaleString() });
             localStorage.setItem('myPosts', JSON.stringify(posts));
             document.getElementById('postContent').value = "";
-            renderPosts(posts);
+            renderPosts();
         }
 
-        function loadPosts() { renderPosts(JSON.parse(localStorage.getItem('myPosts')) || []); }
-
-        function renderPosts(posts) {
+        function renderPosts() {
+            const posts = JSON.parse(localStorage.getItem('myPosts')) || [];
             document.getElementById('feedList').innerHTML = posts.map(p => `
                 <div class="post-card glass-panel">
-                    <h4 style="margin:0; color: var(--neon-teal); font-size: 0.9rem;">Social Hub Admin</h4>
-                    <p style="margin: 10px 0; line-height: 1.5; font-family: 'Padauk';">${p.text}</p>
-                    <small style="color: grey; font-size: 0.6rem;">${p.date}</small>
+                    <h4 style="margin:0; color: var(--neon-teal);">Admin User</h4>
+                    <p style="margin: 10px 0; font-family:'Padauk';">${p.text}</p>
                     <div class="post-actions">
-                        <button class="action-btn" onclick="toggleLike(this)"><i class="fa-regular fa-thumbs-up"></i> Reaction</button>
+                        <button class="action-btn" onclick="this.classList.toggle('active')"><i class="fa-regular fa-thumbs-up"></i> Reaction</button>
                         <button class="action-btn" onclick="toggleComment('${p.id}')"><i class="fa-regular fa-comment"></i> Comment</button>
                     </div>
                     <div id="comment-${p.id}" class="comment-box">
-                        <input type="text" class="comment-input" placeholder="Comment တစ်ခုရေးမည်..." onkeypress="if(event.key === 'Enter') this.value=''">
+                        <input type="text" class="comment-input" placeholder="စာရေးရန်...">
                     </div>
                 </div>
             `).join('');
-        }
-
-        function toggleLike(btn) {
-            btn.classList.toggle('active');
-            const icon = btn.querySelector('i');
-            if(btn.classList.contains('active')) {
-                icon.className = 'fa-solid fa-thumbs-up';
-            } else {
-                icon.className = 'fa-regular fa-thumbs-up';
-            }
         }
 
         function toggleComment(id) {
